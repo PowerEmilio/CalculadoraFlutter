@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class ElevatedButtonEqualWidget extends StatelessWidget {
 
-  final Icon icono;
+  final String operador;
   final function;
    
   const ElevatedButtonEqualWidget({Key? key,
-      required this.icono,
+      required this.operador,
       required this.function,
     }) : super(key: key);
   
@@ -17,7 +17,7 @@ class ElevatedButtonEqualWidget extends StatelessWidget {
 
     return SizedBox(
       height: size.height * 0.14,
-      width: size.width * 0.50,
+      width: size.width * 0.25,
       child: ElevatedButton(
         onPressed: function,
         style: const ButtonStyle(
@@ -28,7 +28,7 @@ class ElevatedButtonEqualWidget extends StatelessWidget {
             )
           ),
         ),
-        child: icono,
+        child: Text(operador, style: const TextStyle(fontSize: 30),),
       ),
     );
   }

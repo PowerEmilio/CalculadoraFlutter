@@ -17,7 +17,7 @@ class ElevatedButtonDeleteOneWidget extends StatelessWidget {
 
     return SizedBox(
       height: size.height * 0.14,
-      width: size.width * 0.50,
+      width: size.width * 0.25,
       child: ElevatedButton(
         onPressed: function,
         style: const ButtonStyle(

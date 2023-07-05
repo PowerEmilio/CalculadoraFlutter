@@ -22,7 +22,8 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
   List<dynamic> segundoNumero = [''];
   List<dynamic> operador = ['+', '+', '+'];
   bool operadorPuesto = false;
-  bool puntoPuesto = false;
+  bool primerPuntoPuesto = false;
+  bool segundoPuntoPuesto = false;
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +67,7 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
     final size = MediaQuery.of(context).size;
 
     return Container(
-      color: Colors.red,
+      color: const Color.fromARGB(255, 66, 66, 66),
       height: size.height * 0.70,
 
       child: Column(
@@ -265,10 +266,10 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
               ),
 
               ElevatedButtonEqualWidget(
-                icono: const Icon(Icons.backspace_rounded),
+                operador: '=',
                 function: (){
                   setState(() {
-                    teclaBorrar();
+                    calcularResultado();
                   });
                 }
               )
@@ -297,19 +298,19 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
   }
 
   dynamic ponerPunto(String punto){
-    if (!puntoPuesto) {
-      if(operadorPuesto){ //Si el operador es true, el primer numero ya fue ingresado
-        puntoPuesto = true;
+    if (operadorPuesto) {
+      if(!segundoPuntoPuesto){ //Si el operador es true, el primer numero ya fue ingresado
+        segundoPuntoPuesto = true;
         segundoNumero.add(punto);
         return segundoNumero;
         
-      } else{
-        puntoPuesto = true;
+      } 
+    } else{
+      if(!primerPuntoPuesto){ //Si el operador es true, el primer numero ya fue ingresado
+        primerPuntoPuesto = true;
         primerNumero.add(punto);
         return primerNumero;
-      }
-    } else{
-      return 0;
+      } 
     }
   }
 
@@ -325,7 +326,8 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
       segundoNumero.clear();
       primerNumero.add(primerNumeroResultado + segundoNumeroResultado);
       operadorPuesto = false;
-      puntoPuesto = false;
+      primerPuntoPuesto = false;
+      segundoPuntoPuesto = false;
       return primerNumero.toString().split('');
 
     } else if (operador.last == '-') {
@@ -335,7 +337,8 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
       segundoNumero.clear();
       primerNumero.add(primerNumeroResultado - segundoNumeroResultado);
       operadorPuesto = false;
-      puntoPuesto = false;
+      primerPuntoPuesto = false;
+      segundoPuntoPuesto = false;
       return primerNumero.toString().split('');
 
     } else if (operador.last == '*') {
@@ -345,7 +348,8 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
       segundoNumero.clear();
       primerNumero.add(primerNumeroResultado * segundoNumeroResultado);
       operadorPuesto = false;
-      puntoPuesto = false;
+      primerPuntoPuesto = false;
+      segundoPuntoPuesto = false;
       return primerNumero.toString().split('');
 
     } else if (operador.last == '/') {
@@ -355,7 +359,8 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
       segundoNumero.clear();
       primerNumero.add(primerNumeroResultado / segundoNumeroResultado);
       operadorPuesto = false;
-      puntoPuesto = false;
+      primerPuntoPuesto = false;
+      segundoPuntoPuesto = false;
       return primerNumero.toString().split('');
 
     } else if (operador.last == '%') {
@@ -365,7 +370,8 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
       segundoNumero.clear();
       primerNumero.add((primerNumeroResultado * segundoNumeroResultado) / 100 );
       operadorPuesto = false;
-      puntoPuesto = false;
+      primerPuntoPuesto = false;
+      segundoPuntoPuesto = false;
       return primerNumero.toString().split('');
     }
   }
@@ -374,7 +380,8 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
     primerNumero.clear();
     segundoNumero.clear();
     operador.clear();
-    puntoPuesto = false;
+    primerPuntoPuesto = false;
+    segundoPuntoPuesto = false;
     operador.add('+');
   }
 
