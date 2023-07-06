@@ -21,6 +21,7 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
   List<dynamic> primerNumero = [''];
   List<dynamic> segundoNumero = [''];
   List<dynamic> operador = ['+', '+', '+'];
+  List<dynamic> vistaPrevia = ['0'];
   bool operadorPuesto = false;
   bool primerPuntoPuesto = false;
   bool segundoPuntoPuesto = false;
@@ -49,14 +50,30 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
       ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.end,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(primerNumero.join(), style: const TextStyle(fontSize: 30, color: Colors.white),),
-            Text(operador.last.toString(), style: const TextStyle(fontSize: 30, color: Colors.white),),
-            Text(segundoNumero.join(), style: const TextStyle(fontSize: 30, color: Colors.white),)
-          ]
+
+            Text(vistaPrevia.last,
+              style: const TextStyle(fontSize: 30, color: Colors.white),
+            ),
+
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(primerNumero.join(),
+                  style: const TextStyle(fontSize: 30, color: Colors.white),
+                ),
+                Text(operador.last.toString(),
+                  style: const TextStyle(fontSize: 30, color: Colors.white),
+                ),
+                Text(segundoNumero.join(),
+                  style: const TextStyle(fontSize: 30, color: Colors.white),
+                )
+              ]
+            ),
+          ],
         ),
       ),
     );
@@ -284,7 +301,10 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
   dynamic ponerNumero(String numero){
 
     if(operadorPuesto){ //Si el operador es true, el primer numero ya fue ingresado
-      return segundoNumero.add(numero);
+      segundoNumero.add(numero);
+      calcularVistaPrevia();
+      return segundoNumero;
+
     } else{
       primerNumero.add(numero);
       return primerNumero;
@@ -315,70 +335,108 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
   }
 
   dynamic calcularResultado(){
+    primerNumero.clear();
+    primerNumero.add(vistaPrevia.last);
+    segundoNumero.clear();
+    vistaPrevia.clear();
+    vistaPrevia.add('0');
+    operadorPuesto = false;
+    primerPuntoPuesto = false;
+    segundoPuntoPuesto = false;
 
-    double primerNumeroResultado = 0;
-    double segundoNumeroResultado = 0;
+  //   double primerNumeroResultado =  double.parse(primerNumero.join());
+  // double segundoNumeroResultado = double.parse(segundoNumero.join());
+
+  //   if (operador.last == '+') {
+  //     primerNumero.clear();
+  //     segundoNumero.clear();
+  //     primerNumero.add(primerNumeroResultado + segundoNumeroResultado);
+  //     operadorPuesto = false;
+  //     primerPuntoPuesto = false;
+  //     segundoPuntoPuesto = false;
+  //     return primerNumero.toString().split('');
+
+  //   } else if (operador.last == '-') {
+  //     primerNumero.clear();
+  //     segundoNumero.clear();
+  //     primerNumero.add(primerNumeroResultado - segundoNumeroResultado);
+  //     operadorPuesto = false;
+  //     primerPuntoPuesto = false;
+  //     segundoPuntoPuesto = false;
+  //     return primerNumero.toString().split('');
+
+  //   } else if (operador.last == '*') {
+  //     primerNumero.clear();
+  //     segundoNumero.clear();
+  //     primerNumero.add(primerNumeroResultado * segundoNumeroResultado);
+  //     operadorPuesto = false;
+  //     primerPuntoPuesto = false;
+  //     segundoPuntoPuesto = false;
+  //     return primerNumero.toString().split('');
+
+  //   } else if (operador.last == '/') {
+  //     primerNumero.clear();
+  //     segundoNumero.clear();
+  //     primerNumero.add(primerNumeroResultado / segundoNumeroResultado);
+  //     operadorPuesto = false;
+  //     primerPuntoPuesto = false;
+  //     segundoPuntoPuesto = false;
+  //     return primerNumero.toString().split('');
+
+  //   } else if (operador.last == '%') {
+  //     primerNumero.clear();
+  //     segundoNumero.clear();
+  //     primerNumero.add((primerNumeroResultado * segundoNumeroResultado) / 100 );
+  //     operadorPuesto = false;
+  //     primerPuntoPuesto = false;
+  //     segundoPuntoPuesto = false;
+  //     return primerNumero.toString().split('');
+  //   }
+  }
+
+  dynamic calcularVistaPrevia(){
+
+    String numToString;
+    double primerNumeroVistaPrevia = double.parse(primerNumero.join());
+    double segundoNumeroVistaPrevia = double.parse(segundoNumero.join());
 
     if (operador.last == '+') {
-      primerNumeroResultado = double.parse(primerNumero.join());
-      segundoNumeroResultado = double.parse(segundoNumero.join());
-      primerNumero.clear();
-      segundoNumero.clear();
-      primerNumero.add(primerNumeroResultado + segundoNumeroResultado);
-      operadorPuesto = false;
-      primerPuntoPuesto = false;
-      segundoPuntoPuesto = false;
-      return primerNumero.toString().split('');
+      numToString = (primerNumeroVistaPrevia + segundoNumeroVistaPrevia).toString();
+      vistaPrevia.add(numToString);
+    
+      return vistaPrevia.toString().split('');
 
     } else if (operador.last == '-') {
-      primerNumeroResultado = double.parse(primerNumero.join());
-      segundoNumeroResultado = double.parse(segundoNumero.join());
-      primerNumero.clear();
-      segundoNumero.clear();
-      primerNumero.add(primerNumeroResultado - segundoNumeroResultado);
-      operadorPuesto = false;
-      primerPuntoPuesto = false;
-      segundoPuntoPuesto = false;
-      return primerNumero.toString().split('');
+      numToString = (primerNumeroVistaPrevia - segundoNumeroVistaPrevia).toString();
+      vistaPrevia.add(numToString);
+     
+      return vistaPrevia.toString().split('');
 
     } else if (operador.last == '*') {
-      primerNumeroResultado = double.parse(primerNumero.join());
-      segundoNumeroResultado = double.parse(segundoNumero.join());
-      primerNumero.clear();
-      segundoNumero.clear();
-      primerNumero.add(primerNumeroResultado * segundoNumeroResultado);
-      operadorPuesto = false;
-      primerPuntoPuesto = false;
-      segundoPuntoPuesto = false;
-      return primerNumero.toString().split('');
+      numToString = (primerNumeroVistaPrevia * segundoNumeroVistaPrevia).toString();
+      vistaPrevia.add(numToString);
+  
+      return vistaPrevia.toString().split('');
 
     } else if (operador.last == '/') {
-      primerNumeroResultado = double.parse(primerNumero.join());
-      segundoNumeroResultado = double.parse(segundoNumero.join());
-      primerNumero.clear();
-      segundoNumero.clear();
-      primerNumero.add(primerNumeroResultado / segundoNumeroResultado);
-      operadorPuesto = false;
-      primerPuntoPuesto = false;
-      segundoPuntoPuesto = false;
-      return primerNumero.toString().split('');
+      numToString = (primerNumeroVistaPrevia / segundoNumeroVistaPrevia).toString();
+      vistaPrevia.add(numToString);
+     
+      return vistaPrevia.toString().split('');
 
     } else if (operador.last == '%') {
-      primerNumeroResultado = double.parse(primerNumero.join());
-      segundoNumeroResultado = double.parse(segundoNumero.join());
-      primerNumero.clear();
-      segundoNumero.clear();
-      primerNumero.add((primerNumeroResultado * segundoNumeroResultado) / 100 );
-      operadorPuesto = false;
-      primerPuntoPuesto = false;
-      segundoPuntoPuesto = false;
-      return primerNumero.toString().split('');
+      numToString = ((primerNumeroVistaPrevia * segundoNumeroVistaPrevia) / 100).toString();
+      vistaPrevia.add(numToString);
+ 
+      return vistaPrevia.toString().split('');
     }
   }
 
   dynamic borrarTodo(){
     primerNumero.clear();
     segundoNumero.clear();
+    vistaPrevia.clear();
+    vistaPrevia.add('0');
     operador.clear();
     primerPuntoPuesto = false;
     segundoPuntoPuesto = false;
