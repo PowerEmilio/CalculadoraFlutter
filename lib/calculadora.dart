@@ -343,55 +343,6 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
     operadorPuesto = false;
     primerPuntoPuesto = false;
     segundoPuntoPuesto = false;
-
-  //   double primerNumeroResultado =  double.parse(primerNumero.join());
-  // double segundoNumeroResultado = double.parse(segundoNumero.join());
-
-  //   if (operador.last == '+') {
-  //     primerNumero.clear();
-  //     segundoNumero.clear();
-  //     primerNumero.add(primerNumeroResultado + segundoNumeroResultado);
-  //     operadorPuesto = false;
-  //     primerPuntoPuesto = false;
-  //     segundoPuntoPuesto = false;
-  //     return primerNumero.toString().split('');
-
-  //   } else if (operador.last == '-') {
-  //     primerNumero.clear();
-  //     segundoNumero.clear();
-  //     primerNumero.add(primerNumeroResultado - segundoNumeroResultado);
-  //     operadorPuesto = false;
-  //     primerPuntoPuesto = false;
-  //     segundoPuntoPuesto = false;
-  //     return primerNumero.toString().split('');
-
-  //   } else if (operador.last == '*') {
-  //     primerNumero.clear();
-  //     segundoNumero.clear();
-  //     primerNumero.add(primerNumeroResultado * segundoNumeroResultado);
-  //     operadorPuesto = false;
-  //     primerPuntoPuesto = false;
-  //     segundoPuntoPuesto = false;
-  //     return primerNumero.toString().split('');
-
-  //   } else if (operador.last == '/') {
-  //     primerNumero.clear();
-  //     segundoNumero.clear();
-  //     primerNumero.add(primerNumeroResultado / segundoNumeroResultado);
-  //     operadorPuesto = false;
-  //     primerPuntoPuesto = false;
-  //     segundoPuntoPuesto = false;
-  //     return primerNumero.toString().split('');
-
-  //   } else if (operador.last == '%') {
-  //     primerNumero.clear();
-  //     segundoNumero.clear();
-  //     primerNumero.add((primerNumeroResultado * segundoNumeroResultado) / 100 );
-  //     operadorPuesto = false;
-  //     primerPuntoPuesto = false;
-  //     segundoPuntoPuesto = false;
-  //     return primerNumero.toString().split('');
-  //   }
   }
 
   dynamic calcularVistaPrevia(){
@@ -440,6 +391,7 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
     operador.clear();
     primerPuntoPuesto = false;
     segundoPuntoPuesto = false;
+    operadorPuesto = false;
     operador.add('+');
   }
 
