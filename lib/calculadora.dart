@@ -398,9 +398,13 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
   dynamic teclaBorrar(){
 
     if (operadorPuesto) {
-      return segundoNumero.remove(segundoNumero.last);
+      segundoNumero.remove(segundoNumero.last);
+      calcularVistaPrevia();
+      return;
     } else{
-      return primerNumero.remove(primerNumero.last);
+      primerNumero.remove(primerNumero.last);
+      calcularVistaPrevia();
+      return;
     }
 
   }
